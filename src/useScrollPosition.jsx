@@ -16,6 +16,10 @@ function getScrollPosition({ element, useWindow }) {
 }
 
 export function useScrollPosition(effect, deps, element, useWindow, wait) {
+  if (!isBrowser) {
+    return
+  }
+
   const position = useRef(getScrollPosition({ useWindow }))
 
   let throttleTimeout = null
@@ -28,10 +32,6 @@ export function useScrollPosition(effect, deps, element, useWindow, wait) {
   }
 
   useIsomorphicLayoutEffect(() => {
-    if (!isBrowser) {
-      return
-    }
-
     const handleScroll = () => {
       if (wait) {
         if (throttleTimeout === null) {

@@ -9,8 +9,10 @@ import { Sidebar, Content, Footer } from '../styles'
 export default () => {
   const [hideOnScroll, setHideOnScroll] = useState(true)
   const rendersCount = useRef(0)
+  const refContainer = useRef(null)
 
   useScrollPosition(
+    refContainer,
     ({ prevPos, currPos }) => {
       const isShow = currPos.y > prevPos.y
       if (isShow !== hideOnScroll) setHideOnScroll(isShow)
@@ -22,7 +24,7 @@ export default () => {
     () => (
       <Fragment>
         <Sidebar show={hideOnScroll}><NavLinks/></Sidebar>
-        <Content><FakeData/></Content>
+        <Content ref={refContainer}><FakeData/></Content>
         <Footer>
           <b>RENDER COUNT: {++rendersCount.current}</b>
         </Footer>

@@ -1,3 +1,30 @@
+#### 1.0.44 (2020-03-19)
+
+##### Chores
+
+*  update examples version ([ec6550e2](https://github.com/n8tb1t/use-scroll-position/commit/ec6550e2650bdfc028a589d24eb9c2230c5aac9c))
+*  radd package-lock.json to examples ([baf68ba6](https://github.com/n8tb1t/use-scroll-position/commit/baf68ba6f9fae6f49bc42c7c376ef564c4ad85b3))
+*  remove package self reference from examples ([81f82d4a](https://github.com/n8tb1t/use-scroll-position/commit/81f82d4ae30227e278ea1f11960ee0e233b5cfe6))
+*  update package prefix everywhere ([0e20cf99](https://github.com/n8tb1t/use-scroll-position/commit/0e20cf99df25f1352461ec31823a94d86c8c3875))
+*  configure gatsby dev server to use sources directly instead of using the package itself as an npm dependency ([e409d4df](https://github.com/n8tb1t/use-scroll-position/commit/e409d4df7e2764428ecb4a9750da9e2f3eff33ea))
+*  replace yarn with npm ([971eb0ff](https://github.com/n8tb1t/use-scroll-position/commit/971eb0ff5576b3555f4c574b39c024de8f39d035))
+
+##### Documentation Changes
+
+*  update README ([f2eb515f](https://github.com/n8tb1t/use-scroll-position/commit/f2eb515fe801c8c889cde3addbc00645eb84484e))
+*  add downloads. ([c5d538b9](https://github.com/n8tb1t/use-scroll-position/commit/c5d538b981d9521fefd86c37c0024a7a8c17f7b2))
+
+##### Other Changes
+
+*  remove unused import ([965c57d3](https://github.com/n8tb1t/use-scroll-position/commit/965c57d313ca26d181a0e920f65a72492374889a))
+*  in hook's interface remove the useWindow parameter and move the element parameter to first position. Also various little improvements (useEffect instead of useLayoutEffect, register scroll event listener as passive, use a ref instead of local variable in hook, improve logic in getScrollPosition function in terms of clarity and performance). Also update examples. Sorry too much stuff O:) ([2569c25b](https://github.com/n8tb1t/use-scroll-position/commit/2569c25bf59e82ec8393138183add67ebd776bfd))
+*  remove all environment-dependent logic and only export hook when in browser ([1ce941fd](https://github.com/n8tb1t/use-scroll-position/commit/1ce941fd633067613764cbc627b3a94d176b757d))
+*  return early when hook is called in a non-browser env ([8f45dffb](https://github.com/n8tb1t/use-scroll-position/commit/8f45dffb1143d552fe41b65a4abd74fee874a613))
+
+##### Code Style Changes
+
+*  remove unnecessary line breaks ([6c06a082](https://github.com/n8tb1t/use-scroll-position/commit/6c06a082f52108e1c5cb157d95ebb30658d114b2))
+
 #### 1.0.43 (2019-11-20)
 
 ##### Bug Fixes

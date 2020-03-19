@@ -1,4 +1,4 @@
-import { DependencyList, EffectCallback, MutableRefObject } from "react";
+import { DependencyList, MutableRefObject } from "react";
 
 interface ScrollProps {
   prevPos: {

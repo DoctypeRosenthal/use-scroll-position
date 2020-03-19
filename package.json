@@ -27,11 +27,10 @@
   "main": "lib/index.js",
   "types": "src/index.d.ts",
   "scripts": {
-    "prepare": "cross-env NODE_ENV=production npm run build",
-    "build": "babel src --out-dir lib --ignore **/__tests__",
-    "watch": "babel -w src --out-dir lib --ignore **/__tests__",
-    "release": "npm version --patch",
-    "preversion": "changelog -p && git add CHANGELOG.md"
+    "build:prod": "cross-env NODE_ENV=production npm run build",
+    "build:dev": "babel src --out-dir lib --ignore **/__tests__",
+    "build:dev:watch": "babel -w src --out-dir lib --ignore **/__tests__",
+    "generate-changelog": "changelog -p && git add CHANGELOG.md"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",

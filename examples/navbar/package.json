@@ -9,7 +9,6 @@
     "build": "gatsby build"
   },
   "dependencies": {
-    "@DoctypeRosenthal/use-scroll-position": "^1.0.29",
     "chance": "^1.0.18",
     "gatsby": "^2.10.5",
     "gatsby-plugin-styled-components": "^3.1.0",

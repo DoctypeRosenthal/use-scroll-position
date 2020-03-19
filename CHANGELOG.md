@@ -1,3 +1,9 @@
+#### 2.1.5 (2020-03-19)
+
+##### Chores
+
+* **release:**  Publish ([9b9d0c68](https://github.com/n8tb1t/use-scroll-position/commit/9b9d0c68d0d7c7a8c507289cf9494c680b9ca989))
+
 #### 2.1.4 (2020-03-19)
 
 #### 2.1.3 (2020-03-19)

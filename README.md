@@ -1,7 +1,7 @@
 # `use-scroll-position`
 
-[![Node version](https://img.shields.io/npm/v/@DoctypeRosenthal/use-scroll-position.svg?style=flat)](https://www.npmjs.com/package/@DoctypeRosenthal/use-scroll-position)
-[![Node version](https://img.shields.io/npm/dw/@DoctypeRosenthal/use-scroll-position)](https://www.npmjs.com/package/@DoctypeRosenthal/use-scroll-position)
+[![Node version](https://img.shields.io/npm/v/@doctyperosenthal/use-scroll-position.svg?style=flat)](https://www.npmjs.com/package/@doctyperosenthal/use-scroll-position)
+[![Node version](https://img.shields.io/npm/dw/@doctyperosenthal/use-scroll-position)](https://www.npmjs.com/package/@doctyperosenthal/use-scroll-position)
 [![Node version](https://img.shields.io/github/license/n8tb1t/use-scroll-position.svg?style=flat)](https://github.com/n8tb1t/use-scroll-position/blob/master/LICENSE)
 
 ![Screenshot](https://github.com/n8tb1t/use-scroll-position/raw/master/examples/screenshot.png)
@@ -20,7 +20,7 @@
 
 ## Install
 ```
-npm i --save @DoctypeRosenthal/use-scroll-position
+npm i --save @doctyperosenthal/use-scroll-position
 ```
 
 ## Usage
@@ -47,7 +47,7 @@ function useScrollPosition(
 
 **Log current scroll position**
 ```jsx
-import { useScrollPosition } from '@DoctypeRosenthal/use-scroll-position'
+import { useScrollPosition } from '@doctyperosenthal/use-scroll-position'
   
 useScrollPosition(({ prevPos, currPos }) => {
   console.log(currPos.x)
@@ -57,7 +57,7 @@ useScrollPosition(({ prevPos, currPos }) => {
 **Change state based on scroll position - Inline CSS**
 ```jsx
 import React, { useState } from 'react'
-import { useScrollPosition } from '@DoctypeRosenthal/use-scroll-position'
+import { useScrollPosition } from '@doctyperosenthal/use-scroll-position'
 
 const [headerStyle, setHeaderStyle] = useState({
   transition: 'all 200ms ease-in'
@@ -87,7 +87,7 @@ const Header = <header style={{ ...headerStyle }} />
 **Change state based on scroll position - Styled Components**
 ```jsx
 import React, { useState } from 'react'
-import { useScrollPosition } from '@DoctypeRosenthal/use-scroll-position'
+import { useScrollPosition } from '@doctyperosenthal/use-scroll-position'
 
 const [hideOnScroll, setHideOnScroll] = useState(true)
   

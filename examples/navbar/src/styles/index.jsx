@@ -65,7 +65,7 @@ export const Wrapper = styled.div``
 export const Position = styled.div`
   background: #e6513d;
   color: white;
-  position: absolute;
+  position: fixed;
   padding: 15px;
   top: 150px;
   left: 10px;

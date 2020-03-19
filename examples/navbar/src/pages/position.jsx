@@ -34,35 +34,29 @@ const PositionStore = () => {
 
 export default () => {
   const positionsStore = PositionStore()
-  const viewportRef = useRef(null)
+  const viewportRef = useRef(window)
   const redBoxRef = useRef(null)
 
   // Viewport scroll position
   useScrollPosition(
-    ({ currPos }) => {
-      positionsStore.setViewportPosition(currPos)
-      const { style } = viewportRef.current
-      style.top = `${150 + currPos.y}px`
-      style.left = `${10 + currPos.x}px`
-    },
+    viewportRef,
+    ({ currPos }) => positionsStore.setViewportPosition(currPos),
     [positionsStore],
-    null,
-    true
   )
 
   // Element scroll position
   useScrollPosition(
+    redBoxRef,
     ({ currPos }) => positionsStore.setElementPosition(currPos),
     [],
-    redBoxRef,
-    false,
     300
   )
+
   return useMemo(
     () => (
       <Wrapper>
         <RedBox ref={redBoxRef}>RED BOX</RedBox>
-        <Position ref={viewportRef}>
+        <Position>
           <div>
             Deferred Rendering:
             <span>{positionsStore.renderCount}</span>

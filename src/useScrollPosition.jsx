@@ -1,49 +1,55 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 
-function getScrollPosition ({ element, useWindow }) {
-  const target = element ? element.current : document.body
-  const position = target.getBoundingClientRect()
-
-  return useWindow
-    ? { x: window.scrollX, y: window.scrollY }
-    : { x: position.left, y: position.top }
-}
+const defaultPosition = { x: 0, y: 0 }
 
 
-export const useScrollPosition = (effect, deps, element, useWindow, wait) => {
-    const position = useRef(getScrollPosition({ useWindow }))
-
-    let throttleTimeout = null
-
-    const callBack = () => {
-      const currPos = getScrollPosition({ element, useWindow })
-      effect({ prevPos: position.current, currPos })
-      position.current = currPos
-      throttleTimeout = null
-    }
-
-    useLayoutEffect(() => {
-      const handleScroll = () => {
-        if (wait) {
-          if (throttleTimeout === null) {
-            throttleTimeout = setTimeout(callBack, wait)
-          }
-        } else {
-          callBack()
-        }
-      }
-
-      window.addEventListener('scroll', handleScroll)
-
-      return () => window.removeEventListener('scroll', handleScroll)
-    }, deps)
+function getScrollPosition (elementRef) {
+  if (!elementRef) {
+    return defaultPosition
   }
 
-useScrollPosition.defaultProps = {
-  deps: [],
-  element: false,
-  useWindow: false,
-  wait: null,
+  if (elementRef.current === window) {
+    return { x: window.scrollX, y: window.scrollY }
+  }
+
+  const position = elementRef.current.getBoundingClientRect()
+  return { x: position.left, y: position.top }
 }
+
+
+export const useScrollPosition = (
+  element,
+  effect,
+  deps = [],
+  wait = 0
+) => {
+  if (!element) {
+    throw Error("useScrollPosition: element must be specified!")
+  }
+  const position = useRef(getScrollPosition())
+  const throttleTimeout = useRef(0)
+  const callBack = () => {
+    const currPos = getScrollPosition(element)
+    effect({ prevPos: position.current, currPos })
+    position.current = currPos
+    throttleTimeout.current = 0
+  }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (wait === 0) {
+        if (throttleTimeout.current === 0) {
+          throttleTimeout.current = setTimeout(callBack, wait)
+        }
+      } else {
+        callBack()
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, deps)
+}
+

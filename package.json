@@ -30,10 +30,8 @@
     "prepare": "cross-env NODE_ENV=production npm run build",
     "build": "babel src --out-dir lib --ignore **/__tests__",
     "watch": "babel -w src --out-dir lib --ignore **/__tests__",
-    "release": "yarn version --patch",
-    "preversion": "changelog -p && git add CHANGELOG.md",
-    "postversion": "cross-var yarn publish --new-version $npm_package_version",
-    "postpublish": "git push && git push --tags"
+    "release": "npm version --patch",
+    "preversion": "changelog -p && git add CHANGELOG.md"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",

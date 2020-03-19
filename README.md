@@ -20,7 +20,7 @@
 
 ## Install
 ```
-yarn add @n8tb1t/use-scroll-position
+npm i --save @n8tb1t/use-scroll-position
 ```
 
 ## Usage

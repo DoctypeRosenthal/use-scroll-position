@@ -19,12 +19,7 @@ function getScrollPosition (elementRef) {
 }
 
 
-export const useScrollPosition = (
-  element,
-  effect,
-  deps = [],
-  wait = 0
-) => {
+export const useScrollPosition = (element, effect, deps = [], wait = 0) => {
   if (!element) {
     throw Error("useScrollPosition: element must be specified!")
   }

@@ -20,9 +20,6 @@ function getScrollPosition (elementRef) {
 
 
 export const useScrollPosition = (element, effect, deps = [], wait = 0) => {
-  if (!element) {
-    throw Error("useScrollPosition: element must be specified!")
-  }
   const position = useRef(getScrollPosition())
   const throttleTimeout = useRef(0)
   const callBack = () => {

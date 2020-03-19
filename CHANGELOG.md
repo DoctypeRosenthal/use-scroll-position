@@ -1,3 +1,9 @@
+#### 2.1.1 (2020-03-19)
+
+##### Chores
+
+*  improve wording in npm script names ([e4253ce9](https://github.com/n8tb1t/use-scroll-position/commit/e4253ce96a576a0b9ff8d482421f4f9f21b7d23b))
+
 #### 2.0.0 (2020-03-19)
 
 ##### Chores

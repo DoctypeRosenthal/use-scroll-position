@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo } from 'react'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useScrollPosition } from '../../../../src/useScrollPosition'
 
 import NavLinks from '../components/nav-links'
 import FakeData from '../components/fake-data'

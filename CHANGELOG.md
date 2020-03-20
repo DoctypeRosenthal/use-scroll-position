@@ -1,3 +1,21 @@
+#### 2.1.5 (2020-03-19)
+
+##### Bug Fixes
+
+*  react hooks not being called in deterministic order ([5a0f8d8e](https://github.com/n8tb1t/use-scroll-position/commit/5a0f8d8e7ebbbf02c4842aca3d89d77c19b0887d))
+
+
+#### 2.0.0 (2020-03-19)
+
+##### BREAKING CHANGES
+
+*  in hook's interface remove the useWindow parameter and move the element parameter to first position. Also various little improvements (useEffect instead of useLayoutEffect, register scroll event listener as passive, use a ref instead of local variable in hook, improve logic in getScrollPosition function in terms of clarity and performance). Also update examples. Sorry too much stuff O:) ([2569c25b](https://github.com/n8tb1t/use-scroll-position/commit/2569c25bf59e82ec8393138183add67ebd776bfd))
+
+##### Other Changes
+
+*  remove all environment-dependent logic and only export hook when in browser ([1ce941fd](https://github.com/n8tb1t/use-scroll-position/commit/1ce941fd633067613764cbc627b3a94d176b757d))
+*  return early when hook is called in a non-browser env ([8f45dffb](https://github.com/n8tb1t/use-scroll-position/commit/8f45dffb1143d552fe41b65a4abd74fee874a613))
+
 #### 1.0.43 (2019-11-20)
 
 ##### Bug Fixes

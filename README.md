@@ -1,10 +1,9 @@
 # `use-scroll-position`
 
-[![Node version](https://img.shields.io/npm/v/@n8tb1t/use-scroll-position.svg?style=flat)](https://www.npmjs.com/package/@n8tb1t/use-scroll-position)
-[![Node version](https://img.shields.io/npm/dw/@n8tb1t/use-scroll-position)](https://www.npmjs.com/package/@n8tb1t/use-scroll-position)
-[![Node version](https://img.shields.io/github/license/n8tb1t/use-scroll-position.svg?style=flat)](https://github.com/n8tb1t/use-scroll-position/blob/master/LICENSE)
+[![Node version](https://img.shields.io/npm/v/doctyperosenthal/use-scroll-position.svg?style=flat)](https://www.npmjs.com/package/doctyperosenthal/use-scroll-position)
+[![Node version](https://img.shields.io/npm/dw/doctyperosenthal/use-scroll-position)](https://www.npmjs.com/package/doctyperosenthal/use-scroll-position)
+[![Node version](https://img.shields.io/github/license/doctyperosenthal/use-scroll-position.svg?style=flat)](https://github.com/doctyperosenthal/use-scroll-position/blob/master/LICENSE)
 
-![Screenshot](https://github.com/n8tb1t/use-scroll-position/raw/master/examples/screenshot.png)
 
 `use-scroll-position` is a React [hook](https://reactjs.org/docs/hooks-reference.html) that returns the browser viewport X and Y scroll position. It is highly optimized and using the special technics to avoid unnecessary rerenders!
 
@@ -20,21 +19,25 @@
 
 ## Install
 ```
-yarn add @n8tb1t/use-scroll-position
+npm i --save @doctyperosenthal/use-scroll-position
 ```
 
 ## Usage
 
 ```jsx
-useScrollPosition(effect,deps, element, useWindow, wait)
+function useScrollPosition(
+  element: MutableRefObject<HTMLElement | null>,
+  effect: (props: ScrollProps) => void,
+  deps?: DependencyList,
+  wait?: number
+): void;
 ```
 
 | Arguments | Description |
 | --------- | ----------- |
+`element`      | Get scroll position for a specified element by reference. If you pass `window` to it you'll get back scrollX and scrollY.
 `effect`    | Effect callback.
 `deps`      | For effects  to fire on selected dependencies change.
-`element`      | Get scroll position for a specified element by reference.
-`useWindow`      | Use `window.scroll` instead of `document.body.getBoundingClientRect()` to detect scroll position.
 `wait`      | The `timeout` in ms. Good for performance.
 
 > The `useScrollPosition` returns `prevPos` and `currPos`.
@@ -43,7 +46,7 @@ useScrollPosition(effect,deps, element, useWindow, wait)
 
 **Log current scroll position**
 ```jsx
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useScrollPosition } from '@doctyperosenthal/use-scroll-position'
   
 useScrollPosition(({ prevPos, currPos }) => {
   console.log(currPos.x)
@@ -53,27 +56,28 @@ useScrollPosition(({ prevPos, currPos }) => {
 **Change state based on scroll position - Inline CSS**
 ```jsx
 import React, { useState } from 'react'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useScrollPosition } from '@doctyperosenthal/use-scroll-position'
 
 const [headerStyle, setHeaderStyle] = useState({
   transition: 'all 200ms ease-in'
 })
 
 useScrollPosition(
-  ({ prevPos, currPos }) => {
-    const isVisible = currPos.y > prevPos.y
-
-    const shouldBeStyle = {
-      visibility: isVisible ? 'visible' : 'hidden',
-      transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
-      transform: isVisible ? 'none' : 'translate(0, -100%)'
-    }
-
-    if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
-
-    setHeaderStyle(shouldBeStyle)
-  },
-  [headerStyle]
+    window,
+    ({ prevPos, currPos }) => {
+        const isVisible = currPos.y > prevPos.y
+        
+        const shouldBeStyle = {
+          visibility: isVisible ? 'visible' : 'hidden',
+          transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+          transform: isVisible ? 'none' : 'translate(0, -100%)'
+        }
+        
+        if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
+        
+        setHeaderStyle(shouldBeStyle)
+    },
+    [headerStyle]
 )
 
 const Header = <header style={{ ...headerStyle }} />
@@ -82,11 +86,13 @@ const Header = <header style={{ ...headerStyle }} />
 **Change state based on scroll position - Styled Components**
 ```jsx
 import React, { useState } from 'react'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useScrollPosition } from '@doctyperosenthal/use-scroll-position'
 
 const [hideOnScroll, setHideOnScroll] = useState(true)
   
-useScrollPosition(({ prevPos, currPos }) => {
+useScrollPosition(
+window,
+({ prevPos, currPos }) => {
   const isShow = currPos.y > prevPos.y
   if (isShow !== hideOnScroll) setHideOnScroll(isShow)
 }, [hideOnScroll])
@@ -98,9 +104,10 @@ useScrollPosition(({ prevPos, currPos }) => {
   
     // Element scroll position
   useScrollPosition(
+    elementRef,
     ({ currPos }) => {
       setElementPosition(currPos)
-    }, [], elementRef
+    }
   )
 ```
 

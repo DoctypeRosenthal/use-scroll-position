@@ -1,56 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useRef } from 'react'
-import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
+import { useEffect, useRef } from 'react'
 
-const isBrowser = typeof window !== `undefined`
 
-function getScrollPosition({ element, useWindow }) {
-  if (!isBrowser) return { x: 0, y: 0 }
+const defaultPosition = { x: 0, y: 0 }
 
-  const target = element ? element.current : document.body
-  const position = target.getBoundingClientRect()
 
-  return useWindow
-    ? { x: window.scrollX, y: window.scrollY }
-    : { x: position.left, y: position.top }
-}
-
-export function useScrollPosition(effect, deps, element, useWindow, wait) {
-  const position = useRef(getScrollPosition({ useWindow }))
-
-  let throttleTimeout = null
-
-  const callBack = () => {
-    const currPos = getScrollPosition({ element, useWindow })
-    effect({ prevPos: position.current, currPos })
-    position.current = currPos
-    throttleTimeout = null
+function getScrollPosition (elementRef) {
+  if (!elementRef) {
+    return defaultPosition
   }
 
-  useIsomorphicLayoutEffect(() => {
-    if (!isBrowser) {
-      return
-    }
+  if (elementRef.current === window) {
+    return { x: window.scrollX, y: window.scrollY }
+  }
 
+  const position = elementRef.current.getBoundingClientRect()
+  return { x: position.left, y: position.top }
+}
+
+
+export const useScrollPosition = (element, effect, deps = [], wait = 0) => {
+  const position = useRef(getScrollPosition())
+  const throttleTimeout = useRef(0)
+  const callBack = () => {
+    const currPos = getScrollPosition(element)
+    effect({ prevPos: position.current, currPos })
+    position.current = currPos
+    throttleTimeout.current = 0
+  }
+
+  useEffect(() => {
     const handleScroll = () => {
-      if (wait) {
-        if (throttleTimeout === null) {
-          throttleTimeout = setTimeout(callBack, wait)
+      if (wait === 0) {
+        if (throttleTimeout.current === 0) {
+          throttleTimeout.current = setTimeout(callBack, wait)
         }
       } else {
         callBack()
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, deps)
 }
 
-useScrollPosition.defaultProps = {
-  deps: [],
-  element: false,
-  useWindow: false,
-  wait: null,
-}

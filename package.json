@@ -1,6 +1,6 @@
 {
-  "name": "@n8tb1t/use-scroll-position",
-  "version": "1.0.43",
+  "name": "@doctyperosenthal/use-scroll-position",
+  "version": "2.1.5",
   "author": "n8tb1t <n8tb1t@gmail.com>",
   "license": "MIT",
   "description": "Use scroll position ReactJS hook done right",
@@ -27,13 +27,11 @@
   "main": "lib/index.js",
   "types": "src/index.d.ts",
   "scripts": {
-    "prepare": "cross-env NODE_ENV=production npm run build",
-    "build": "babel src --out-dir lib --ignore **/__tests__",
-    "watch": "babel -w src --out-dir lib --ignore **/__tests__",
-    "release": "yarn version --patch",
-    "preversion": "changelog -p && git add CHANGELOG.md",
-    "postversion": "cross-var yarn publish --new-version $npm_package_version",
-    "postpublish": "git push && git push --tags"
+    "build:prod": "cross-env NODE_ENV=production npm run build",
+    "build:dev": "babel src --out-dir lib --ignore **/__tests__",
+    "build:dev:watch": "babel -w src --out-dir lib --ignore **/__tests__",
+    "generate-changelog": "changelog -p && git add CHANGELOG.md",
+    "preversion": "npm run generate-changelog"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
